@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+				xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:q="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:adm="http://github.com/adminfaces"
+                template="#{layoutMB.template}">
+    
+	<ui:define name="title">
+		Modification d'un personnel
+	</ui:define>
+    <ui:define name="body">
+       <h:form class="form-inline">
+       	<p:panel id="panel">
+        	<p:focus context="@form"/>
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <div id="main-buttons" class="hidden-sm hidden-xs">
+                        <p:commandButton action="#{utilisateurBean.update}" icon="fa fa-save"
+                                         value="Sauvegarder" styleClass="btn-success btn-lg">
+                            <f:ajax execute="@form" render="@form" />
+                         </p:commandButton>       
+                        <p:spacer width="5"/>
+                       <p:commandButton value="Clear" icon="fa fa-refresh" styleClass="btn-danger btn-lg"
+                                         disabled="false" 
+                                         process="@this" resetValues="true"
+                                         >
+                        <p:resetInput target="panel" />
+                        <p:ajax update="@form" resetValues="true" render="@form" />
+                        </p:commandButton>
+                        <p:spacer width="5"/>
+                        <p:commandButton value="Retour" styleClass="btn-info btn-lg"
+                                         action="/admin/personnel/gestionPersonnels?faces-redirect=true"
+                                         immediate="true"
+                                         icon="fa fa-reply"/>
+                         <p:spacer width="5"/>
+                        <p:commandButton value="Modifier mot de passe" styleClass="btn-primary btn-lg"
+                                         action="/admin/personnel/modifPasswordByAdmin?faces-redirect=true"
+                                         immediate="true"
+                                         icon="fa fa-key"/>
+                    </div><br/><br/>
+                    
+                    <div class="col-md-4">
+                   		<div class="form-group has-feedback">
+						    <p:outputLabel for="nom" value="Nom:" style="margin-right:65px;"/>
+						    <p:inputText id="nom" value="#{utilisateurBean.selectedUtilisateur.nom}" name="nom"
+						   			 class="text form-control form-control input-lg" q:placeholder="Nom"
+						   			 required="true" requiredMessage="Merci de saisir un nom"
+						   			 />
+						   	<i class="fa fa-user form-control-feedback"></i><br/>
+							<h:message for="nom" id="nomMessage" styleClass="errorBlock" />
+					    </div><br/><br/>
+					    
+                   	    <div class="form-group has-feedback">
+						    <p:outputLabel for="prenom" value="Prenom:" style="margin-right:45px;"/>
+						    <p:inputText id="prenom" value="#{utilisateurBean.selectedUtilisateur.prenom}" name="prenom"
+						   			 class="text form-control form-control input-lg" q:placeholder="prenom"
+						   			 required="true" requiredMessage="Merci de saisir un prenom"
+						   			 />
+						   	<i class="fa fa-user form-control-feedback"></i><br/>
+							<h:message for="prenom" id="prenomMessage" styleClass="errorBlock" />	 
+					    </div><br/><br/>
+					    
+       				    <div class="form-group has-feedback">
+						    <p:outputLabel for="email" value="Email:" style="margin-right:60px;"/>
+						    <p:inputText id="email" value="#{utilisateurBean.selectedUtilisateur.email}" q:placeholder="Email"
+						   			 class="text email form-control form-control input-lg" name="email"
+						   			 required="true" requiredMessage="Merci de saisir un email"
+						   			 >
+						   	</p:inputText>
+						   	<i class="fa fa-envelope form-control-feedback" style="font-size: 18px;"></i><br/>
+							<h:message for="email" id="emailMessage" styleClass="errorBlock" />
+					    </div><br/><br/>
+					    
+					    <div class="form-froup has-feedback">
+		                    <h:panelGrid columns="2">
+		                   		 <p:outputLabel for="poste" value="Poste:" style="margin-right:65px;" />
+		                    	<p:selectOneMenu id="poste" value="#{utilisateurBean.selectedUtilisateur.poste.id}" style="width:210px">
+            						<f:selectItems value="#{utilisateurBean.postes}" var="p" itemValue="#{p.id}" itemLabel="#{p.nom}"/>
+						        </p:selectOneMenu>
+						      </h:panelGrid>
+	                    </div><br/><br/>
+					    
+                   	    <div class="form-froup has-feedback">
+		                    <h:panelGrid columns="2">
+		                   		 <p:outputLabel for="type" value="Type:" style="margin-right:65px;" />
+		                    	<p:selectOneMenu id="type" value="#{utilisateurBean.selectedUtilisateur.type}" style="width:210px">
+						            <f:selectItem itemLabel="admin" itemValue="admin" />
+						            <f:selectItem itemLabel="personnel" itemValue="personnel" />
+						        </p:selectOneMenu>
+						      </h:panelGrid>
+	                    </div>
+	                </div>
+                 </div>
+             </div>
+           </p:panel>
+       </h:form>
+    </ui:define>
+
+</ui:composition>

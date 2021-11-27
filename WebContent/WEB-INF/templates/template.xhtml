@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="/admin.xhtml"> 
+	<ui:define name="head">
+        <h:outputStylesheet library="css"/>
+    </ui:define>
+
+    <ui:define name="logo-lg">
+        Page Admin
+    </ui:define>
+
+
+    <ui:define name="menu">
+        <ul class="sidebar-menu" data-widget="tree">
+            <li>
+                <p:link outcome="/admin/accueilAdmin.xhtml">
+                    <i class="fa fa-home"></i>
+                    <span>Accueil</span>
+                </p:link>
+            </li>
+	        <li class="header">
+	            General
+	        </li>
+	   <!-- <li class="treeview">
+	        	 <a href="#">
+	                <i class="glyphicon glyphicon-briefcase"></i>
+	                <span>Caisse</span>
+			     </a>
+	        
+	        	<ul class="treeview-menu" id="a">
+		        		<li>
+				            <a href="/gestionEntreprise/admin/solde.xhtml">
+				                <i class="glyphicon glyphicon-usd"></i>
+				                <span>Solde</span>
+				            </a>
+			            </li>
+			            <li>
+				            <a href="/gestionEntreprise/admin/gestionEncaissement.xhtml">
+				                <i class="fa fa-credit-card"></i>
+				                <span>Gestion des encaissements</span>
+		           			 </a>
+			            </li>
+			             <li>
+				            <a href="/gestionEntreprise/admin/gestionDepenses.xhtml">
+				                <i class="fa fa-paypal"></i>
+				                <span>Gestion des depenses</span>
+		           			</a>
+			            </li>
+			            <li>
+				            <a href="/gestionEntreprise/admin/seuilCaisse.xhtml">
+				                <i class="fa fa-exclamation-circle"></i>
+				                <span>Seuil de la caisse</span>
+		           			</a>
+			            </li>
+	             </ul>
+	        </li> -->
+	        <li class="treeview">
+	            <a href="#">
+	                <i class="fa fa-users"></i>
+	                <span>Equipe</span>
+	            </a>
+	            
+	            	<ul class="treeview-menu">
+		        		<li>
+				            <a href="/GMAO/admin/personnel/gestionPersonnels.xhtml">
+				                <i class="fa fa-user"></i>
+				                <span>Gestion du personnel</span>
+				            </a>
+			            </li>
+			       <!-- <li>
+				            <a href="/gestionEntreprise/admin/gestionStages.xhtml">
+				                <i class="fa fa-users"></i>
+				                <span>Gestion des stages</span>
+				            </a>
+			            </li>
+			            <li>
+				            <a href="/gestionEntreprise/admin/gestionDemandes.xhtml">
+				                <i class="fa fa-comment"></i>
+				                <span>Gestion des demandes</span>
+				                <span class="badge badge-light">#{demandeBean.nbreDemandes}</span>
+		           			</a>
+			            </li>
+			            <li>
+				            <a href="/gestionEntreprise/admin/gestionReunions.xhtml">
+				                <i class="fa fa-users"></i>
+				                <span>Gestion des reunions</span>
+		           			</a>
+			            </li>
+			             <li>
+				            <a href="/gestionEntreprise/admin/gestionActualites.xhtml">
+				                <i class="fa fa-rss"></i>
+				                <span>Gestion des actualités</span>
+		           			</a>
+			            </li>-->
+	             	</ul>
+	        </li> 
+	        
+	        
+	       <li class="treeview">
+	            <a href="#">
+	                <i class="fa fa-list"></i>
+	                <span>Inventaire</span>
+	            </a>
+	            
+            	<ul class="treeview-menu" id="c">
+	        		<li>
+			            <a href="/GMAO/admin/equipement/gestionEquipements.xhtml">
+			                <i class="fa fa-list"></i>
+			                <span>Gestion des equipements</span>
+			            </a>
+		            </li>
+             	</ul>
+	        </li>   
+	        
+	        <li class="treeview">
+	            <a href="#">
+	                <i class="fa fa-cog"></i>
+	                <span>Paramètres</span>
+	            </a>
+	            
+            	<ul class="treeview-menu" >
+	        	<!--<li class="treeview">
+			            <a href="#">
+			                <i class="fa fa-map-marker"></i>
+			                <span>Gestion du local</span>
+			            </a>
+				            <ul class="treeview-menu">
+				            	<li>
+						            <a href="/gestionEntreprise/admin/organigram.xhtml">
+						                <span>Structure</span>
+						            </a>
+						        </li>
+				            	<li>
+						            <a href="/gestionEntreprise/admin/gestionLocal.xhtml">
+						                <span>Les locaux</span>
+						            </a>
+			            		</li>
+			            		<li>
+						            <a href="/gestionEntreprise/admin/gestionEtages.xhtml">
+						                <span>Les etages</span>
+						            </a>
+			            		</li>
+			            		<li>
+						            <a href="/gestionEntreprise/admin/gestionAppartements.xhtml">
+						                <span>Les appartements</span>
+						            </a>
+			            		</li>
+			            		<li>
+						            <a href="/gestionEntreprise/admin/gestionBureaux.xhtml">
+						                <span>Les bureaux</span>
+						            </a>
+			            		</li>
+				            </ul>
+		            </li>
+		            <li>
+			            <a href="/gestionEntreprise/admin/gestionFournisseurs.xhtml">
+			                <i class="fa fa-user"></i>
+			                <span>Gestion des fournisseurs</span>
+			            </a>
+		            </li>
+		            <li>
+			            <a href="/gestionEntreprise/admin/gestionTypeDepenses.xhtml">
+			                <i class="fa fa-paypal"></i>
+			                <span>Types de depenses</span>
+			            </a>
+		            </li>-->
+		            <li>
+			            <a href="#">
+			                <i class="fa fa-wrench"></i>
+			                <span>Gestion des postes</span>
+			            </a>
+		            </li>
+             	</ul>
+	        </li> -->  
+	 
+        </ul>        
+     </ui:define>
+
+    <ui:define name="top-menu">
+        <ui:include src="/includes/top-bar.xhtml"/>
+    </ui:define>
+
+</ui:composition>

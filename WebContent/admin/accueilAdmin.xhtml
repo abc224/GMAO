@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                template="#{layoutMB.template}">
+    <ui:define name="title">
+    <style>
+    .ui-messages {   
+    position:fixed;
+    top: 42px;
+    padding:0;
+    width: 544px !important;
+    height:50px !important;
+    left: 50% !important;
+	margin-left: -172px;
+	}
+	.ui-tab{
+		font-weight: bold;
+		font-size: 35px;
+		display: block;
+		background-color:#2980a9;
+		color: #fff;
+	}
+	.titre{
+		font-weight: bold;
+		font-size: 25px;
+		color: #2980a9;
+		margin:0px;
+		padding:0px;
+		letter-spacing: 3px;
+	}
+    </style>
+  
+    <p style="text-align: center; font-size: 60px;">Tableau de bord</p>
+    </ui:define>
+	<ui:define name="body">
+	
+		<div class="container-fluid">
+			<p:tabView>
+				<p:tab title="Statistiques">
+					<div class="row">
+				
+						<div class="col-md-4">
+							<div class="divBleu">
+								<p class="titres">Nombre d'utilisateurs</p>
+							</div>
+							<div class="div2">
+								<p class="nbres">#{utilisateurBean.nbreUtilisateurs}</p>
+							</div>
+						</div>
+				
+					
+						<div class="col-md-4">
+							<div class="divBleu">
+								<p class="titres">Nombre d'equipements</p>
+							</div>
+							<div class="div2">
+								<p class="nbres">#{equipementBean.nbreEquipements}</p>
+							</div>
+						</div>
+				
+					
+						<div class="col-md-4">
+							<div class="divBleu">
+								<p class="titres">Nombre...</p>
+							</div>
+							<div class="div2">
+								<p class="nbres">#{fournisseurBean.nbreFournisseurs}</p>
+							</div>
+						</div>
+				
+					</div>
+				</p:tab>
+			</p:tabView>
+		</div>
+	</ui:define>
+	
+	
+	
+</ui:composition>

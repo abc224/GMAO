@@ -1,0 +1,273 @@
+.nav li {
+
+  border-bottom: none;
+  height: 50px;
+  font-size: 1.4em;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.nav > ul > li {
+  text-align: center;
+}
+  	
+    	
+ body {
+  margin: 0;
+  padding: 0;
+}
+
+.nav ul {
+  list-style: none;
+  background-color: #2980b9;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+.nav li {
+  font-size: 1.5em;
+  line-height: 50px;
+  text-align: left;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  padding-left: 15px;
+}
+
+.center_div{
+    margin: 0 auto;
+    width:80% /* value of your choice which suits your alignment */
+}
+
+
+.nav a:hover {
+  background-color: #005f5f;
+  height: 100%;
+}
+
+ .singleLine
+	{
+	    text-wrap:none;
+	    white-space:nowrap;
+	    overflow:hidden;
+	    text-overflow:ellipsis;
+	}
+   
+   .bv{
+   	width: 15px;
+    height: 15px; 
+    border: 1px solid green;
+    background-color: green; 
+    margin-left: 10px; 
+    display: inline-block;
+   }
+   
+    .br{
+   	width: 15px;
+    height: 15px; 
+    border: 1px solid red;
+    background-color: red; 
+    display: inline-block;
+   }
+   
+   .avant{
+    	background-color: red !important;
+    	display: block;
+    }
+    
+    .apres{
+   	 background-color: green !important;
+   	 display: block;
+    }
+    
+        #layout-menu_menu {
+            z-index: 9997!important;
+        }
+        #layout-menu_menu span.ui-menuitem-text {
+            margin-left: 2px;
+        }
+
+		.breadcrumb{
+			visibility:none;
+		}
+		#link-home{
+			visibility:hidden;
+			display: none;
+			}
+	   .errorBlock{
+			color:red;
+			font-size: 1em;
+			margin-left: 50px;
+			}
+		
+				
+			.treeview-menu li{
+			margin-left:15px;
+			}
+			
+			.date input {
+	width: 210px;
+      
+		}
+			
+			.tab{
+			text-align: center;
+			}
+			
+		#div1{
+		position: relative;
+		height: 150px;
+		}
+		
+		.r{
+		color:#EA2027 !important;
+		font-weight: bold !important;
+		}
+	
+		.v{
+		color:#00FF32 !important;
+		font-weight: bold !important;
+		}
+		
+		.o{
+		color: #e67e22;
+		font-weight: bold;
+		}
+		
+		.large{
+		width:80%;
+		}
+		
+		.growl{
+			position:fixed;
+		    top: 0;
+		    padding:0;
+		    width: 545px !important;
+		    height:50px !important;
+		}
+		
+		.caisse{
+		font-weight: bold;
+		font-size: 35px;
+		display: block;
+		background-color:#2980a9;
+		color: #fff;
+	}
+		
+		.fc-time {
+    display: none;
+		}
+		
+	.fc-title {
+	   font-size: 15px;
+	}
+		
+		.ui-row-editor .ui-row-editor-pencil {
+        margin-left:8px;
+   	 	}
+   	 	
+   	 .oui{
+   	 	background:#fff !important; 
+   	 	color:#000;
+   	 	font-size:15px;
+   	 	padding-top:0px;
+   	 	padding-bottom:0px;
+   	 	}
+   	 .non{
+   	 	font-weight: bold;
+   	 	background: #f5f7f7 !important;
+   	 	color:#000;
+   	 	font-size:15px;
+   	 	padding-top:0px;
+   	 	padding-bottom:0px;
+   	 }
+   	 
+   	 #link-home{
+		visibility:hidden;
+		display: none;
+		}
+		
+
+.divBleu{
+	background-color: #2980a9;
+ 	height:50%;
+  	border:1px solid black; 
+  	border-top-left-radius:25px; 
+  	border-top-right-radius:25px;
+}
+    	
+.div2{
+	background-color: #2c3e50;
+	height: 50%;
+	border:1px solid black;
+	border-bottom-left-radius:25px;
+	border-bottom-right-radius:25px;
+}
+
+.nbres{
+	color:#fff;
+	font-weight: bold;
+	font-size: 40px;
+	text-align: center;
+}
+   	 	
+ 	 	.titres{
+ 	 		text-align: center;
+ 	 		color:#fff;
+ 	 		font-size:30px;
+ 	 		padding-top: 30px;
+ 	 	}
+   	 	
+   	.ui-messages {   
+    position:fixed;
+    top: 42px;
+    padding:0;
+    width: 544px !important;
+    height:50px !important;
+    left: 50% !important;
+	margin-left: -172px;
+	}
+	.ui-tab{
+		font-weight: bold;
+		font-size: 35px;
+		display: block;
+		background-color:#2980a9;
+		color: #fff;
+	}
+	.titre{
+		font-weight: bold;
+		font-size: 25px;
+		color: #2980a9;
+		margin:0px;
+		padding:0px;
+		letter-spacing: 3px;
+	}
+   	 
+   	   	/* .main-sidebar{
+   	background-color: #fff !important;
+   	}
+    
+    .sidebar{
+    background-color: #fff;
+    }
+    
+    .logo{
+    background-color: #fff !important;
+    }
+     .header{
+    background-color: #fff !important;
+    }
+    
+     .active{
+    background-color: #fff !important;
+    }
+    
+    .logo-lg{
+    	background-color: #fff !important;
+    }
+    
+   */ 

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+				xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:q="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:adm="http://github.com/adminfaces"
+                template="#{layoutMB.template}">
+    
+	<ui:define name="title">
+		Ajout d'un equipement
+	</ui:define>
+	
+    <ui:define name="body">
+       <h:form class="form-inline">
+       	<p:panel id="panel">
+        	<p:focus context="@form"/>
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <div id="main-buttons" class="hidden-sm hidden-xs">
+                        <p:commandButton action="#{equipementBean.ajout}" icon="fa fa-save"
+                                         value="Sauvegarder" styleClass="btn-success btn-lg">
+                            <f:ajax execute="@form" render="@form" />
+                         </p:commandButton>       
+                        <p:spacer width="5"/>
+                        <p:commandButton value="Clear" icon="fa fa-refresh" styleClass="btn-danger btn-lg"
+                                         disabled="false" 
+                                         process="@this" resetValues="true"
+                                         >
+                        <p:resetInput target="panel" />
+                        <p:ajax update="@form" resetValues="true" render="@form" />
+                        </p:commandButton>
+                        <p:spacer width="5"/>
+                        <p:commandButton value="Retour" styleClass="btn-info btn-lg"
+                                         action="/admin/equipement/gestionEquipements?faces-redirect=true"
+                                         immediate="true"
+                                         icon="fa fa-reply"/>
+                    </div><br/><br/>
+                    
+                   <div class="col-md-12">
+                   	 
+					   <div class="form-group">
+						    <p:outputLabel for="code" value="Code:" style="margin-right:45px;"/>
+						    <p:inputText id="code" value="#{equipementBean.code}" 
+						   			 class="form-control"/>
+						   	<h:message for="code" id="codeMessage" styleClass="errorBlock" />
+					   </div><br/><br/>
+					   
+					   <div class="form-group">
+						    <p:outputLabel for="libelle" value="Libelle:" style="margin-right:38px;"/>
+						    <p:inputText id="libelle" value="#{equipementBean.libelle}" 
+						   			 class="form-control"/>
+						   	<h:message for="libelle" id="libelleMessage" styleClass="errorBlock" />
+					   </div><br/><br/>
+					   
+					   <div class="form-group">
+						    <p:outputLabel for="marque" value="Marque:" style="margin-right:38px;"/>
+						    <p:inputText id="marque" value="#{equipementBean.marque}" 
+						   			 class="form-control"/>
+						   	<h:message for="code" id="marqueMessage" styleClass="errorBlock" />
+					   </div><br/><br/>
+					   
+					   <div class="form-group">
+				    		<p:outputLabel for="date" value="Date:" style="margin-right:45px;"/>
+				    		<p:calendar id="date" showOn="button" navigator="true" style="width:250px;"
+							  pattern="dd/MM/yyyy" value="#{equipementBean.dateMiseEnMarche}"
+							   />
+						<h:message for="date" id="dateMessage" styleClass="errorBlock" />
+			  			</div><br/><br/>
+			  			
+			  			<div>
+		                    <h:panelGrid columns="3">
+		                   		 <p:outputLabel for="secteur" value="Secteur:" style="margin-right:38px;" />
+		                    	<p:selectOneMenu id="secteur" value="#{equipementBean.idSecteur}" required="true" style="width:165px;">
+            						<f:selectItems value="#{equipementBean.listeSecteurs}" var="s" itemValue="#{s.id}" itemLabel="#{s.libelle}"/>
+						        </p:selectOneMenu>
+						        <h:message for="libelle" id="secteurMessage" styleClass="errorBlock" style="margin-left:-40px;"/>
+						    </h:panelGrid>
+                    	</div><br/><br/>
+                    	
+                    	<div>
+		                    <h:panelGrid columns="3">
+		                   		 <p:outputLabel for="etatEquipement" value="Etat:" style="margin-right:40px;" />
+		                    	<p:selectOneMenu id="etatEquipement" value="#{equipementBean.idEtatEquipement}" required="true" style="width:165px;">
+            						<f:selectItems value="#{equipementBean.listeEtatEquipements}" var="e" itemValue="#{e.id}" itemLabel="#{e.libelle}"/>
+						        </p:selectOneMenu>
+						        <h:message for="etatEquipement" id="etatEquipementMessage" styleClass="errorBlock" style="margin-left:-40px;"/>
+						    </h:panelGrid>
+                    	</div><br/>
+					    
+					                   
+                  </div>  
+                 </div>
+             </div>
+           </p:panel>
+       </h:form>
+    </ui:define>
+
+</ui:composition>

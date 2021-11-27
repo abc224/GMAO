@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:adm="http://github.com/adminfaces"
+                template="#{layoutMB.template}">
+    
+	<ui:define name="title">
+		Gestion du personnel
+	</ui:define>
+	
+    <ui:define name="body">
+     <h:form id="form">
+        	<p:focus context="@form"/>
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <div id="main-buttons" class="hidden-sm hidden-xs">
+                        <p:commandButton action="/admin/personnel/ajoutPersonnel?faces-redirect=true" icon="fa fa-plus"
+                                         value="Ajouter" styleClass="btn-primary btn-lg"/>
+                        <p:spacer width="5"/>
+                        <p:commandButton value="Supprimer" icon="fa fa-trash" styleClass="btn-danger btn-lg"
+                                         action="#{utilisateurBean.supprimer}" id="deleteButton"
+                                        disabled="#{utilisateurBean.disabled}"
+                                         process="@this" update="@form"
+                                         >
+                            <p:confirm header="Confirmation" message="Êtes vous sûr?" icon="ui-icon-danger"/>
+                        </p:commandButton>
+                        <p:spacer width="5"/>
+                        <p:commandButton value="Modifier" update="@(.ui-dialog)" styleClass="btn-warning btn-lg"
+                                         disabled="#{utilisateurBean.disabled}" id="update"
+                                         icon="fa fa-edit" action="/admin/personnel/modifierPersonnel?faces-redirect=true" />
+                       	<p:spacer width="5"/>
+                        <p:commandButton value="Afficher" update="@(.ui-dialog)" styleClass="btn-success btn-lg"
+                                         disabled="#{utilisateurBean.disabled}" id="aff"
+                                         icon="fa fa-search" process="userDT" oncomplete="PF('userDialog').show()" />
+                    
+                    </div>
+
+                    <p:separator/>
+                    <p:dataTable widgetVar="usersTable" var="u" value="#{utilisateurBean.utilisateurs}" rows="5"
+                                 rowKey="#{u.id}" lazy="true" paginator="true" id="userDT" selectionMode="single"
+                                 paginatorPosition="bottom" selection="#{utilisateurBean.selectedUtilisateur}" 
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {JumpToPageDropdown}"
+                                 currentPageReportTemplate="[ {startRecord} to {endRecord} of {totalRecords} ]"
+                                 rowsPerPageTemplate="5,10,15,20" 
+                                 >
+                        <p:ajax event="rowSelect" update=":form:deleteButton :form:update :form:aff" listener="#{utilisateurBean.onRowSelect}" />  
+                        
+ 
+
+                        <p:column headerText="Nom" style="text-align:justify;">
+                            #{u.nom}
+                        </p:column>
+                        <p:column headerText="Prenom" style="text-align:justify;">
+                            #{u.prenom}
+                        </p:column>
+                         <p:column headerText="Email" style="text-align:justify;">
+                            #{u.email}
+                        </p:column>
+                         <p:column headerText="Postes" style="text-align:justify;">
+                            #{u.poste.nom}
+                        </p:column>
+                         <p:column headerText="Rôles" style="text-align:justify;" >
+                        	 #{u.type}
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </div>
+            
+              <p:dialog header="Detail du personnel" widgetVar="userDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+		        <p:outputPanel id="userDetail" style="text-align:center;">
+		            <p:panelGrid  columns="2" style="font-size:20px;">
+		               
+		                <h:outputText value="Nom" />
+		                <h:outputText value="#{utilisateurBean.selectedUtilisateur.nom}" />
+		 
+		                <h:outputText value="Prenom:" />
+		                <h:outputText value="#{utilisateurBean.selectedUtilisateur.prenom}" />
+		 
+		                <h:outputText value="Email:" />
+		                <h:outputText value="#{utilisateurBean.selectedUtilisateur.email}" />
+		             
+		                <h:outputText value="Type" />
+		                <h:outputText value="#{utilisateurBean.selectedUtilisateur.type}" />
+		                
+		                 <h:outputText value="Poste" />
+		                <h:outputText value="#{utilisateurBean.selectedUtilisateur.poste.nom}" />
+		            </p:panelGrid>
+		        </p:outputPanel>
+    		</p:dialog>
+            
+            
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="box-danger box-solid">
+                <p:commandButton value="Oui" type="button" styleClass="btn-material btn-primary ui-confirmdialog-yes"
+                                 icon="fa fa-check"/>
+                <p:commandButton value="Non" type="button" styleClass="btn-material btn-danger ui-confirmdialog-no"
+                                 icon="fa fa-close"/>
+            </p:confirmDialog>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

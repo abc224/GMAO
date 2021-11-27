@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+				xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:q="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:adm="http://github.com/adminfaces"
+                template="#{layoutMB.template}">
+    
+	<ui:define name="title">
+		Modification d'un equipement
+	</ui:define>
+	
+    <ui:define name="body">
+       <h:form class="form-inline">
+       	<p:panel id="panel">
+        	<p:focus context="@form"/>
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <div id="main-buttons" class="hidden-sm hidden-xs">
+                       <p:commandButton action="#{equipementBean.update}" icon="fa fa-save"
+                                         value="Sauvegarder" styleClass="btn-success btn-lg">
+                            <f:ajax execute="@form" render="@form" />
+                         </p:commandButton>       
+                        <p:spacer width="5"/>
+                        <p:commandButton value="Clear" icon="fa fa-refresh" styleClass="btn-danger btn-lg"
+                                         disabled="false" 
+                                         process="@this" resetValues="true"
+                                         >
+                        <p:resetInput target="panel" />
+                        <p:ajax update="@form" resetValues="true" render="@form" />
+                        </p:commandButton>
+                        <p:spacer width="5"/>
+                        <p:commandButton value="Retour" styleClass="btn-info btn-lg"
+                                         action="/admin/equipement/gestionEquipements?faces-redirect=true"
+                                         immediate="true"
+                                         icon="fa fa-reply"/>
+                    </div><br/><br/>
+                    
+                   <div class="col-md-4">
+                   	  <div class="form-group">
+						    <p:outputLabel for="code" value="Code:" style="margin-right:45px;"/>
+						    <p:inputText id="code" value="#{equipementBean.selectedEquipement.code}" 
+						   			 class="form-control"/><br/>
+						   	<h:message for="code" id="codeMessage" styleClass="errorBlock" />
+					   </div><br/><br/>
+                   	 	
+                   	 	<div class="form-group">
+						    <p:outputLabel for="libelle" value="Libelle:" style="margin-right:45px;"/>
+						    <p:inputText id="libelle" value="#{equipementBean.selectedEquipement.libelle}" 
+						   			 class="form-control"/><br/>
+						   	<h:message for="libelle" id="libelleMessage" styleClass="errorBlock" />
+					   </div><br/><br/>
+					   
+					   <div class="form-group">
+						    <p:outputLabel for="marque" value="Marque:" style="margin-right:45px;"/>
+						    <p:inputText id="marque" value="#{equipementBean.selectedEquipement.marque}" 
+						   			 class="form-control"/><br/>
+						   	<h:message for="marque" id="marqueMessage" styleClass="errorBlock" />
+					   </div><br/><br/>
+					   
+					   <div class="form-group">
+				    		<p:outputLabel for="date" value="Date:" style="margin-right:45px;"/>
+				    		<p:calendar id="date" showOn="button" navigator="true" style="width:250px;"
+							  pattern="dd/MM/yyyy" value="#{equipementBean.selectedEquipement.dateMiseEnMarche}"
+							   /><br/>
+						<h:message for="date" id="dateMessage" styleClass="errorBlock" />
+			  			</div><br/>	 <br/>  
+                   	 	
+			    	   <div>
+		                    <h:panelGrid columns="2">
+		                   		 <p:outputLabel for="secteur" value="Secteur:" style="margin-right:45px;" />
+		                    	<p:selectOneMenu id="secteur" value="#{equipementBean.selectedEquipement.secteur.id}" style="width:165px;">
+            						<f:selectItems value="#{equipementBean.listeSecteurs}" var="s" itemValue="#{s.id}" itemLabel="#{s.libelle}"/>
+						        </p:selectOneMenu>
+						    </h:panelGrid>
+                    	</div><br/><br/>
+                    	
+                    	<div>
+		                    <h:panelGrid columns="2">
+		                   		 <p:outputLabel for="etatEquipement" value="Etat:" style="margin-right:45px;" />
+		                    	<p:selectOneMenu id="etatEquipement" value="#{equipementBean.selectedEquipement.etatEquipement.id}" style="width:165px;">
+            						<f:selectItems value="#{equipementBean.listeEtatEquipements}" var="e" itemValue="#{e.id}" itemLabel="#{e.libelle}"/>
+						        </p:selectOneMenu>
+						    </h:panelGrid>
+                    	</div><br/><br/>
+			                 
+                  </div>  
+                 </div>
+             </div>
+           </p:panel>
+       </h:form>
+    </ui:define>
+
+</ui:composition>

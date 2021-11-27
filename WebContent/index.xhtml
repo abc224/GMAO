@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:adm="http://github.com/adminfaces"
+      xmlns:q="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Connexion</title>
+        <meta charset="ISO-8859-1"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+        <style type="text/css">
+            body .load-bar {
+               margin-top: -20px;
+            }   
+            /* below css hides growls in small screens and makes messages visible */
+            @media (max-width: 768px) {
+                body div.ui-growl {
+                    display: none;
+                   
+                }
+                body div.ui-messages {
+                    display: block;
+                }
+            }
+            
+           /* below css hides messages in medium/big devices and makes growl visible in such devices */
+            @media (min-width: 769px) {
+                body div.ui-growl {
+                    display: block;
+                }
+                body div.ui-messages {
+                    display: none;
+                }
+            }
+            body.login-page {
+                background-color: transparent;
+            }
+            html {
+                background: url(#{resource[ 'images:gmoa.jpeg' ]}) no-repeat center center fixed;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
+			
+			@media (max-width: 768px) {
+				 html {
+				     background-image: url(#{resource[ 'images:gmoa.jpeg' ]});
+				 }
+			}
+			
+			.errorBlock{
+			color:red;
+			font-size: 1em;
+			}
+			
+			html{
+			 overflow: hidden;
+			}
+			
+			.login-box{
+			  margin-top: 50vh; /* poussé de la moitié de hauteur de viewport */
+  			  transform: translateY(-50%);
+  			  background: transparent;
+			}
+          
+       
+          
+        </style>
+    </h:head>
+
+    <h:body styleClass="hold-transition login-page">
+    <p:growl sticky="true" globalOnly="true">
+			<p:autoUpdate />
+	</p:growl>
+        <div id="loader" class="load-bar" style="display: none;">
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        
+    
+
+        <div class="login-box">
+           
+            <!-- /.login-logo -->
+            <div class="box login-box-body">
+                <h:form>
+                    <p class="login-box-msg">Connectez vous pour demarrer votre session</p>
+                   
+                    <div class="form-group has-feedback">
+                    <h:inputText class="text email" name="email" id="email" styleClass="form-control"
+							value="#{loginBean.email}" q:placeholder="Entrer votre email"
+							>
+						<f:ajax event="blur" render="emailMessage" />
+					</h:inputText>
+						<i class="fa fa-envelope form-control-feedback"></i>
+						<h:message for="email" id="emailMessage" styleClass="errorBlock" />
+                    </div>
+                    <div class="form-group has-feedback">
+                    	<h:inputSecret class="text form-control" name="password" id="password"
+							 value="#{loginBean.password}" q:placeholder="Entrer votre mot de passe">
+							<f:ajax event="blur" render="passwordMessage" />
+						</h:inputSecret>
+						<i class="fa fa-lock form-control-feedback" style="font-size: 18px"></i>
+						<h:message for="password" id="passwordMessage" styleClass="errorBlock" />
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <p:selectBooleanCheckbox itemLabel="Se souvenir de moi" value="false"/>
+                        </div>
+                        <p:spacer height="10"/>
+                        <div class="col-xs-12">
+                        <h:commandButton  value="CONNEXION" action="#{loginBean.doLogin}" 
+                        	styleClass="btn btn-success btn-block" onclick="showBar()">
+							<f:ajax execute="@form" render="@form" />
+						</h:commandButton>
+                        </div>
+                    </div>
+                </h:form>
+            </div>
+        </div>
+        <adm:ripple />
+
+    </h:body>
+</html>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+				xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:q="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:adm="http://github.com/adminfaces"
+                template="/WEB-INF/templates/templatePersonnel.xhtml">
+
+    <ui:define name="logo-lg">
+        Bienvenue 
+    </ui:define>
+	<ui:define name="title">
+		Suivi de mes stagiaires
+	</ui:define>
+
+	
+    <ui:define name="body">
+       <h:form class="form-inline" id="form">
+        	<p:focus context="@form"/>
+            <div class="box box-primary">
+                <div class="box-header with-border" > 
+  
+                <p:tabView var="s" value="#{stageBean.stageEncadrant}">
+                 	<p:tab title="#{s.stagiaire.nom} #{s.stagiaire.prenom}">
+		                <div style="width:100%; display : flex;"> 
+			                <div style="width:12%; margin-right:5px;">
+			                Date Debut:  <h:outputText value="#{s.dateDebut}"><f:convertDateTime locale="fr" type="date" pattern="dd MMMM yyyy"/></h:outputText>
+			                </div> 
+			                <div class="progress" style="width:76%;">
+			  					<div class="#{stageBean.getPourcentageStageEncadrant(s.dateDebut,s.dateFin) lt 50 ? 
+			  					'progress-bar progress-bar-striped active' : (stageBean.getPourcentageStageEncadrant(s.dateDebut,s.dateFin) 
+			  					lt 99 ? 'progress-bar progress-bar-striped progress-bar-warning active' :
+			  					'progress-bar progress-bar-striped progress-bar-danger')}" role="progressbar" 
+		  								 style="width:#{stageBean.getPourcentageStageEncadrant(s.dateDebut,s.dateFin)}%">
+		  								 #{stageBean.getPourcentageStageEncadrant(s.dateDebut,s.dateFin)}%
+		  						</div>
+							</div>  
+							<div style="width:12%;margin-left:8px;">
+								Date fin:  <h:outputText value="#{s.dateFin}"><f:convertDateTime locale="fr" type="date" pattern="dd MMMM yyyy"/></h:outputText>
+							</div>   
+						 </div>  
+						 
+						   <h3 align="center">Tâches accomplies</h3>
+						   
+						    <p:dataTable id="taches" var="task" value="#{tacheBean.getTachesStagesEncadrant(s.id)}" emptyMessage="Aucune tâche disponible" selection="#{tacheBean.selectedTache}">
+						        <p:column headerText="Date" width="90" >
+						            <h:outputText value="#{task.dateTache}">
+	  									<f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+									</h:outputText>
+						        </p:column>
+						        <p:column headerText="nom" width="120">
+						            <h:outputText value="#{task.nom}" />
+						        </p:column>
+						        <p:column headerText="Description" width="350" styleClass="singleLine" >
+                        	 		<h:outputText value="#{task.description}" />
+                        		</p:column>
+						        <p:column width="75">
+						             <p:commandButton process="@this" update=":form:taskDetail" oncomplete="PF('taskDialog').show()" icon="fa fa-eye" value="Afficher" class="btn btn-primary btn-sm">
+						                <f:setPropertyActionListener value="#{task}" target="#{tacheBean.selectedTache}" />
+						            </p:commandButton>
+					       		 </p:column>
+					       		  <p:column width="165" selectRow="false">
+						             <p:commandButton value="Télécharger la pièce jointe" icon="fa fa-download" class="btn btn-success" ajax="false"
+				             				  action="#{tacheBean.download}" process="@this" 
+				             				  rendered="#{task.fichier !=null ? true : false}" immediate="true">
+				             				<f:setPropertyActionListener value="#{task}" target="#{tacheBean.selectedTache}" />
+				             		</p:commandButton>
+					       		 </p:column>
+						    </p:dataTable>
+					</p:tab>
+				 </p:tabView>
+                </div>
+                
+		        <p:dialog header="Detail de la tâche" widgetVar="taskDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			        <p:outputPanel id="taskDetail" style="text-align:center;">
+			            <p:panelGrid  columns="1">
+			                <h:outputText value="Description de la tâche" style="font-weight:bold;"/>
+				               <p:inputTextarea rows="2" cols="35"  id="description" 
+								      autoResize="true" value="#{tacheBean.selectedTache.description}" />
+			            </p:panelGrid>
+			        </p:outputPanel>
+		    	</p:dialog>
+            </div>
+            
+         
+       </h:form>
+    </ui:define>
+
+</ui:composition>

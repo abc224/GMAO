@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+				xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:q="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:adm="http://github.com/adminfaces"
+                template="#{layoutMB.template}">
+    <ui:define name="logo-lg">
+        Bienvenue
+    </ui:define>
+	<ui:define name="title">
+		Liste de mes reunions
+		
+	</ui:define>
+
+	<ui:define name="title">
+		Les actualités
+	</ui:define>
+	
+	<ui:define name="menu" id="menu" autoupdate="true">
+
+    	 <ul class="sidebar-menu" data-widget="tree" id="a">
+	        <li>
+	           <p:link href="/gestionEntreprise/personnel/accueilPersonnel.xhtml">
+	                <i class="fa fa-comment"></i>
+	                <span>Suivi de mes demandes</span>
+	            </p:link>
+	        </li> 
+	         <li>
+	           <p:link href="/gestionEntreprise/personnel/faireDemande.xhtml">
+	                <i class="fa fa-plus"></i>
+	                <span>Faire une demande</span>
+	            </p:link>
+	        </li>
+	        <li id="b">
+	           <p:link href="/gestionEntreprise/personnel/listeActualites.xhtml">
+	                <i class="fa fa-rss"></i>
+	                <span>Les actualités </span>
+	                <h:outputText id="c" value="#{actualiteBean.nbreActualitesNonLues}" 
+	                			  styleClass="badge badge-light" rendered="#{actualiteBean.nbreActualitesNonLues lt 1 ? false : true}"/>
+	            </p:link>
+	        </li>
+	        <li class="treeview">
+	       	 	<a href="#">
+	                <i class="fa fa-users"></i>
+	                <span>Mes reunions</span>
+	                <span class="badge badge-light">#{reunionBean.nbreReunionsUser}</span>
+			     </a>
+			     
+		     	<ul class="treeview-menu">
+	        		<li>
+			            <a href="/gestionEntreprise/personnel/agendaReunionsUtilisateur.xhtml">
+			                <i class="fa fa-calendar"></i>
+			                <span>Agenda</span>
+			            </a>
+		            </li>
+		            
+		            <li>
+			            <a href="/gestionEntreprise/personnel/listeReunionsUser.xhtml">
+			                <i class="glyphicon glyphicon-th-list"></i>
+			                <span>Liste de mes reunions</span>
+	           			</a>
+		            </li>
+		            
+		            
+	            </ul>
+	        </li>
+	         <li>
+	            <p:link href="/gestionEntreprise/personnel/suiviStagiaire.xhtml">
+	                <i class="fa fa-user"></i>
+	                <span>Suivi de mes stagiaires</span>
+	            </p:link>
+	        </li> 
+	        <li>
+	            <p:link href="/gestionEntreprise/personnel/modifierPassword.xhtml">
+	                <i class="fa fa-lock"></i>
+	                <span>Modification de mot de passe</span>
+	            </p:link>
+	        </li> 
+        </ul>
+    </ui:define>
+	
+	
+	
+    <ui:define name="body">
+
+     <h:form id="form">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <p:separator/>
+                      <p:accordionPanel value="#{actualiteBean.listeActualitesUser}"  id="a" var="actu" multiple="false" activeIndex="null" >
+					       <p:ajax event="tabChange" listener="#{actualiteBean.onTabChange}" immediate="true" update="a,c" global="true"/>
+					        <p:tab title="#{actu[0].dateActualite}  #{actu[0].titre}" titleStyleClass="#{actu[1].vue eq true ? 'oui' : 'non'}">
+					           <h:panelGrid columns="1">
+               						 <h:outputText value="#{actu[0].contenu}" /><br/>
+               						 <p:commandLink action="#{actualiteBean.download}" ajax="false" style="font-weight:bold;" rendered="#{actu[0].fichier != null}">Telecharger le fichier joint</p:commandLink>
+           						 </h:panelGrid>
+					        </p:tab>
+    				</p:accordionPanel>
+                </div>
+            </div>
+       
+            
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="box-danger box-solid">
+                <p:commandButton value="Oui" type="button" styleClass="btn-material btn-primary ui-confirmdialog-yes"
+                                 icon="fa fa-check"/>
+                <p:commandButton value="Non" type="button" styleClass="btn-material btn-danger ui-confirmdialog-no"
+                                 icon="fa fa-close"/>
+            </p:confirmDialog>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

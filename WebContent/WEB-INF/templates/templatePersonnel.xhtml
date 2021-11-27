@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="/admin.xhtml"
+                > 
+                
+            <ui:define name="head">
+        		<h:outputStylesheet library="css" />
+    		</ui:define>
+
+
+    <ui:define name="logo-lg">
+        Bienvenue
+    </ui:define>
+
+<ui:define name="menu" id="menu" autoupdate="true">
+
+    	 <ul class="sidebar-menu" data-widget="tree" id="a">
+	        <li>
+	           <p:link href="/gestionEntreprise/personnel/accueilPersonnel.xhtml">
+	                <i class="fa fa-comment"></i>
+	                <span>Suivi de mes demandes</span>
+	            </p:link>
+	        </li> 
+	         <li>
+	           <p:link href="/gestionEntreprise/personnel/faireDemande.xhtml">
+	                <i class="fa fa-plus"></i>
+	                <span>Faire une demande</span>
+	            </p:link>
+	        </li>
+	        <li id="b">
+	           <p:link href="/gestionEntreprise/personnel/listeActualites.xhtml">
+	                <i class="fa fa-rss"></i>
+	                <span>Les actualités</span>
+	                <ui:fragment rendered="#{actualiteBean.nbreActualitesNonLues eq 0 ? false : true}" immediate="true" id="c">
+	             		<p:autoUpdate/>
+	             		<span class="badge badge-pill badge-danger">
+	                		#{actualiteBean.nbreActualitesNonLues} 
+	                	</span>
+	                </ui:fragment>
+	            </p:link>
+	        </li>
+	        <li class="treeview">
+	       	 	<a href="#">
+	                <i class="fa fa-users"></i>
+	                <span>Mes reunions</span>
+	                <span class="badge badge-light">#{reunionBean.nbreReunionsUser}</span>
+			     </a>
+			     
+		     	<ul class="treeview-menu">
+	        		<li>
+			            <a href="/gestionEntreprise/personnel/agendaReunionsUtilisateur.xhtml">
+			                <i class="fa fa-calendar"></i>
+			                <span>Agenda</span>
+			            </a>
+		            </li>
+		            
+		            <li>
+			            <a href="/gestionEntreprise/personnel/listeReunionsUser.xhtml">
+			                <i class="glyphicon glyphicon-th-list"></i>
+			                <span>Liste de mes reunions</span>
+	           			</a>
+		            </li>
+		            
+	            </ul>
+	        </li>
+	        <li>
+	            <p:link href="/gestionEntreprise/personnel/suiviStagiaire.xhtml">
+	                <i class="fa fa-tasks"></i>
+	                <span>Suivi de mes stagiaires</span>
+	            </p:link>
+	        </li> 
+	        <li>
+	            <p:link href="/gestionEntreprise/personnel/modifierPassword.xhtml">
+	                <i class="fa fa-lock"></i>
+	                <span>Modification de mot de passe</span>
+	            </p:link>
+	        </li> 
+        </ul>
+    </ui:define>
+
+	<ui:define name="top-menu">
+        <ui:include src="/includes/top-bar.xhtml"/>
+    </ui:define>
+</ui:composition>

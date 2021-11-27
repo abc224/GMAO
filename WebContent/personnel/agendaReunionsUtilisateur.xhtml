@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+				xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:q="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:adm="http://github.com/adminfaces"
+                template="/WEB-INF/templates/templatePersonnel.xhtml">
+    <ui:define name="logo-lg">
+        Bienvenue
+        <script type="text/javascript">
+        PrimeFaces.locales ['fr'] = {
+        	    closeText: 'Fermer',
+        	    prevText: 'Précédent',
+        	    nextText: 'Suivant',
+        	    monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre' ],
+        	    monthNamesShort: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc' ],
+        	    dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+        	    dayNamesShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+        	    dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+        	    weekHeader: 'Semaine',
+        	    firstDay: 1,
+        	    isRTL: false,
+        	    showMonthAfterYear: false,
+        	    yearSuffix:'',
+        	    timeOnlyTitle: 'Choisir l\'heure',
+        	    timeText: 'Heure',
+        	    hourText: 'Heures',
+        	    minuteText: 'Minutes',
+        	    secondText: 'Secondes',
+        	    currentText: 'Maintenant',
+        	    ampm: false,
+        	    month: 'Mois',
+        	    week: 'Semaine',
+        	    day: 'Jour',
+        	    allDayText: 'Toute la journée'
+        	};
+        </script>
+    </ui:define>
+	<ui:define name="title">
+		Liste de mes reunions
+	</ui:define>    
+	<ui:define name="title">
+		Mon agenda des reunions
+	</ui:define>
+	
+    <ui:define name="body">
+    
+     <h:form id="form">
+        	<p:focus context="@form"/>
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                	<div class="row">
+                		<div class="col-md-3">
+                			<div class="bv"></div> <span style="font-size: 20px;"> Les reunions passées</span>
+                		</div>
+                		<div class="col-md-3">
+                			<div class="br"></div> <span style="font-size: 20px;"> Les reunions en attente</span>
+                		</div>
+                		<div class="col-md-6">
+                			<span style="font-size: 20px; font-weight: bold;">Note: </span> <span style="font-size: 20px;">Cliquez sur une reunion pour voir les détails de cette reunion</span>
+                		</div>
+                	</div><br/>
+                	
+	                <p:schedule id="schedule" value="#{reunionBean.eventModel}" draggable="false" locale="fr" widgetVar="myschedule" timeZone="CET" >
+	               		 <p:ajax event="eventSelect" immediate="true" listener="#{reunionBean.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+	                </p:schedule>
+                </div>
+            </div>
+    		 <p:dialog widgetVar="eventDialog" header="Details de la reunion" showEffect="clip" hideEffect="clip" >
+		      <p:outputPanel id="eventDetails" style="text-align:center;">
+		            <p:panelGrid  columns="2" style="font-size:20px;">
+		               	<h:outputLabel value="Date: " style="font-weight:bold;" /> 
+		 
+		               	 <h:outputText value="#{reunionBean.event.data.dateReunion}">
+	  							<f:convertDateTime type="date" pattern="dd-MM-yyyy" timeZone="CET"/>
+						 </h:outputText>
+						 
+						 <h:outputLabel value="Heure: " style="font-weight:bold; text-align:left;" /> 
+		 
+		               	 <h:outputText value="#{reunionBean.event.data.horaire}">
+	  							<f:convertDateTime type="time" pattern="HH:mm"/>
+						 </h:outputText>
+						 
+						 <h:outputLabel value="Local: " style="font-weight:bold;" /> 
+		 
+		               	 <h:outputText value="#{reunionBean.event.data.local.nom}">
+						 </h:outputText>
+						 
+						  <h:outputLabel value="Etage: " style="font-weight:bold;" /> 
+		 
+		               	 <h:outputText value="#{reunionBean.event.data.etage.nom}">
+						 </h:outputText>
+						 
+						  <h:outputLabel value="Appartement: " style="font-weight:bold;" /> 
+		 
+		               	 <h:outputText value="#{reunionBean.event.data.appartement.nom}">
+						 </h:outputText>
+						 
+						  <h:outputLabel value="Bureau: " style="font-weight:bold;" /> 
+		 
+		               	 <h:outputText value="#{reunionBean.event.data.bureau.nom}">
+						 </h:outputText>
+						 
+
+		           </p:panelGrid>
+		           <p:panelGrid columns="1">
+		                <h:outputText value="Ordre du jour" style="font-weight:bold;" />
+		          
+		                <p:inputTextarea rows="2" cols="38" 
+						      autoResize="true" value="#{reunionBean.event.data.ordreDuJour}" />
+		            
+		             <p:commandLink action="#{reunionBean.download}" style="margin-right:20px;" ajax="false" rendered="#{reunionBean.event.data.fichier!=null}">
+        				<h:outputText value="Telecharger le fichier joint" style="text-align:right; font-weight:bold;" />
+    				</p:commandLink> 
+		            </p:panelGrid>
+		        </p:outputPanel>
+		    </p:dialog> 
+            
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="box-danger box-solid">
+                <p:commandButton value="Oui" type="button" styleClass="btn-material btn-primary ui-confirmdialog-yes"
+                                 icon="fa fa-check"/>
+                <p:commandButton value="Non" type="button" styleClass="btn-material btn-danger ui-confirmdialog-no"
+                                 icon="fa fa-close"/>
+            </p:confirmDialog>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

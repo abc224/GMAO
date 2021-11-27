@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="/admin.xhtml"  
+                > 
+	
+  	<ui:define name="head">
+        <h:outputStylesheet library="css"/>
+    </ui:define>
+    <ui:define name="logo-lg">
+        Bienvenue
+    </ui:define>
+
+<ui:define name="menu" id="menu" autoupdate="true">
+	<h:form>
+    	 <ul class="sidebar-menu" data-widget="tree" id="a" >
+    	 
+    	  <li>
+	           <p:link href="/gestionEntreprise/stagiaire/accueilStagiaire.xhtml">
+	                <i class="fa fa-tasks"></i>
+	                <span>Suivi de mon stage</span>
+	            </p:link>
+	        </li> 
+	        <li class="treeview">
+	       	 	<a href="#">
+	                <i class="fa fa-book"></i>
+	                <span>Paperasses</span>
+			     </a>
+			     
+		     	<ul class="treeview-menu">
+	        		<li>
+			            <p:commandLink class="fa fa-download" action="#{stageBean.downloadDemande}" ajax="false"> Télécharger la demande BFI</p:commandLink>
+		            </li>
+		            
+		           <li>
+			          <p:link href="/gestionEntreprise/stagiaire/demandeBfi.xhtml"> 
+			            <i class="fa fa-upload"></i>
+			          	<span>Uploader la demande BFI</span>
+			          </p:link>
+	        	   </li> 
+		            
+	            </ul>
+	        </li>
+	        <li>
+	            <p:link href="/gestionEntreprise/stagiaire/gestionTachesStagiaire.xhtml">
+	                <i class="fa fa-tasks"></i>
+	                <span>Gestion de mes tâches</span>
+	            </p:link>
+	        </li> 
+	           <li>
+	            <p:link href="/gestionEntreprise/stagiaire/modifPasswordByStagiaire.xhtml">
+	                <i class="fa fa-lock"></i>
+	                <span>Modification de mot de passe</span>
+	            </p:link>
+	        </li> 
+        </ul>
+       </h:form>
+    </ui:define>
+
+	<ui:define name="top-menu">
+        <ui:include src="/includes/top-bar.xhtml"/>
+    </ui:define>
+</ui:composition>

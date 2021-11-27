@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+				xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:q="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:adm="http://github.com/adminfaces"
+                template="/WEB-INF/templates/templatePersonnel.xhtml">
+    <ui:define name="logo-lg">
+        Bienvenue
+    </ui:define>
+	<ui:define name="title">
+		Faire une demande
+	</ui:define>
+	
+    <ui:define name="body">
+       <h:form class="form-inline">
+       	<p:panel id="panel">
+        	<p:focus context="@form"/>
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <div id="main-buttons" class="hidden-sm hidden-xs">
+                        <p:commandButton action="#{demandeBean.ajout}" icon="fa fa-save"
+                                         value="Sauvegarder" styleClass="btn-success btn-lg">
+                            <f:ajax execute="@form" render="@form" />
+                         </p:commandButton>       
+                        <p:spacer width="5"/>
+                        <p:commandButton value="Clear" icon="fa fa-refresh" styleClass="btn-danger btn-lg"
+                                         disabled="false" 
+                                         process="@this" resetValues="true"
+                                         >
+                        <p:resetInput target="panel" />
+                        <p:ajax update="@form" resetValues="true" render="@form" />
+                        </p:commandButton>
+                        <p:spacer width="5"/>
+                        <p:commandButton value="Retour" styleClass="btn-info btn-lg"
+                                         action="/personnel/accueilPersonnel?faces-redirect=true"
+                                         immediate="true"
+                                         icon="fa fa-reply"/>
+                    </div><br/><br/>
+                    
+                   <div class="col-md-4">
+			            <div class="form-group">
+				    		<p:outputLabel for="date" value="Date:" style="margin-right:60px;"/>
+				    		<p:calendar id="date" showOn="button" navigator="true" style="width:250px;"
+							  pattern="dd/MM/yyyy" value="#{demandeBean.dateDemande}"
+							   >
+							</p:calendar><br/>
+							<h:message for="date" id="dateMessage" styleClass="errorBlock" />
+			  			</div><br/><br/>
+			  			
+			  			<div>
+		                    <h:panelGrid columns="2">
+		                   		 <p:outputLabel for="type" value="Type:" style="margin-right:62px;" />
+		                    	<p:selectOneMenu id="type" value="#{demandeBean.type}" style="width:165px">
+            						<f:selectItem itemValue="service" itemLabel="Service"/>
+            						<f:selectItem itemValue="attestation de travail" itemLabel="Attestation de travail"/>
+            						<f:selectItem itemValue="fiche de paye" itemLabel="Fiche de paye"/>
+						        </p:selectOneMenu>
+						      </h:panelGrid>
+                    	</div><br/>
+                    	
+                    	<div class="form-group">
+						    <p:outputLabel for="designation" value="Designation:" style="margin-right:23px;"/>
+						    <p:inputText id="designation" value="#{demandeBean.designation}" 
+						   			 class="form-control"/><br/>
+						   	<h:message for="designation" id="designationMessage" styleClass="errorBlock" />
+					   </div><br/><br/>
+			  			
+					   <div class="form-group">
+						    <p:outputLabel for="motif" value="Motif:" style="margin-right:63px;"/>
+						    <p:inputTextarea rows="3" cols="23" id="motif"
+						     autoResize="true" value="#{demandeBean.motif}"/><br/><br/>
+    					<h:message for="motif" id="motifMessage" styleClass="errorBlock" />
+					   </div><br/><br/>  
+                  </div>  
+                 </div>
+             </div>
+           </p:panel>
+       </h:form>
+    </ui:define>
+
+</ui:composition>
